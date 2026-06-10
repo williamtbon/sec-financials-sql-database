@@ -2,32 +2,34 @@
 
 ## Purpose
 
-I built this project to practice working with real SEC financial-statement data in a database format. The goal was to take public SEC EDGAR/XBRL company facts and organize them into a cleaner SQLite structure that can be queried for financial analysis.
+I built this project to practice working with real SEC financial-statement data in a database format. The goal was to take public SEC EDGAR/XBRL company facts and organize them into a local SQLite database that can be queried for financial analysis.
 
-This project helped me understand how raw financial data can be collected, normalized, stored, and analyzed using Python and SQL.
+This project was useful because it helped me understand the data side of finance. Before ratios or valuation models can be built, the underlying financial data has to be collected, cleaned, structured, and stored in a way that can actually be used.
 
-## What It Does
+## What This Project Does
 
 This project creates a local SQL database using public SEC financial-statement data.
 
-Core features include:
+Main features include:
 
-- Pulling public company financial facts from SEC data sources
-- Processing XBRL-style financial data
-- Storing financial information in SQLite
-- Creating database tables for easier analysis
-- Allowing financial-statement data to be queried with SQL
-- Supporting repeatable company-level financial analysis
+* Pulling public company financial facts from SEC data sources
+* Processing XBRL-style financial data
+* Storing financial information in SQLite
+* Creating tables for easier company-level analysis
+* Allowing financial-statement data to be queried with SQL
+* Supporting future analysis such as ratios, screening, or valuation work
 
-## Why SQL?
+## Why I Used SQL
 
-Raw financial data can be difficult to analyze directly because it is often stored in nested or semi-structured formats. A SQL database makes it easier to:
+Raw financial data can be difficult to analyze directly because it is often nested, inconsistent, or spread across different reporting periods. SQL makes the data easier to organize and query.
 
-- Filter by company
-- Compare reporting periods
-- Query specific financial concepts
-- Organize data across multiple firms
-- Build future analysis tools on top of the database
+A database structure makes it easier to:
+
+* Filter by company
+* Review financial concepts
+* Compare reporting periods
+* Store repeatable outputs
+* Build future analysis tools on top of the same dataset
 
 ## Project Structure
 
@@ -50,7 +52,7 @@ git clone https://github.com/williamtbon/sec-financials-sql-database.git
 cd sec-financials-sql-database
 ```
 
-Install dependencies:
+Install the required packages:
 
 ```bash
 pip install -r requirements.txt
@@ -62,20 +64,9 @@ Run the script:
 python sec_financials_sql_model.py
 ```
 
-## Example Use Cases
+## Example SQL Queries
 
-This database can be used to practice:
-
-- Querying company financial statement data
-- Comparing financial metrics across periods
-- Building financial ratio models
-- Creating screening tools
-- Connecting Python analysis with SQL storage
-- Preparing data for future valuation or credit models
-
-## Example SQL Questions
-
-Once the data is stored, the database could be used to answer questions such as:
+Once the database is created, it can be used to practice queries like:
 
 ```sql
 SELECT *
@@ -95,43 +86,52 @@ FROM financial_facts
 WHERE concept LIKE '%NetIncome%';
 ```
 
+The exact table and column names may depend on the database schema used in the script.
+
+## Notes From Building This
+
+This project helped me understand that financial data is not always clean or standardized. SEC data is very useful, but companies may use different tags or reporting structures for similar financial concepts.
+
+One important takeaway was that data engineering is part of financial analysis. A model is only as useful as the data structure behind it. Building the SQL database helped me practice organizing raw financial data before using it for deeper analysis.
+
 ## SEC Data Access Note
 
-When working with SEC data, requests should follow SEC fair-access expectations. This means using reasonable request frequency and, when required, a clear User-Agent identifying the application or user.
+When working with SEC data, requests should follow SEC fair-access expectations. That means using reasonable request frequency and, when required, including a clear User-Agent that identifies the application or user.
 
-Do not aggressively scrape SEC systems or send unnecessary high-frequency requests.
+This project is intended to use public data responsibly and should not be used to aggressively scrape SEC systems.
 
-## What I Learned
+## Example Use Cases
 
-While building this project, I learned that:
+This project can be used to practice:
 
-- SEC financial data is powerful but not always simple to work with.
-- Companies may report similar financial concepts using different tags.
-- XBRL data requires careful handling before it can be used for analysis.
-- A normalized SQL database makes financial data easier to query and reuse.
-- Data engineering is an important part of financial analysis, not just a technical side task.
+* Querying company financial statement data
+* Comparing company data across reporting periods
+* Building financial ratio models
+* Creating screening tools
+* Connecting Python analysis with SQL storage
+* Preparing data for valuation or credit-analysis projects
 
 ## Limitations
 
 This project has several limitations:
 
-- SEC data may require additional cleaning before advanced analysis.
-- Financial concepts may not map perfectly across all companies.
-- The database should not be treated as audited financial reporting.
-- Some company-specific filings may require manual review.
-- The model may need adjustments for firms with unusual reporting structures.
+* SEC data may need additional cleaning before advanced analysis.
+* Financial concepts may not map perfectly across all companies.
+* Some company-specific filings may require manual review.
+* The database should not be treated as audited financial reporting.
+* The model may need adjustments for companies with unusual reporting structures.
 
 ## Future Improvements
 
-Possible future improvements include:
+Future improvements could include:
 
-- Adding more robust company/ticker mapping
-- Improving XBRL concept standardization
-- Adding financial ratio calculations
-- Creating a dashboard or reporting layer
-- Supporting multiple database backends
-- Adding error handling and logging
-- Expanding the database schema for broader analysis
+* Improving ticker and company mapping
+* Standardizing XBRL concepts more carefully
+* Adding financial ratio calculations
+* Creating a dashboard or reporting layer
+* Adding better error handling and logging
+* Supporting larger batches of companies
+* Expanding the database schema for broader analysis
 
 ## Disclaimer
 
